@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বিষয়ভিত্তিক প্রশ্ন | BD চাকরির পাঠশালা</title>
+<meta name="description" content="বাংলা, English, গণিত, সাধারণ জ্ঞান, বাংলাদেশ ও আন্তর্জাতিক বিষয়াবলিসহ বিভিন্ন বিষয় অনুযায়ী চাকরির প্রশ্ন দেখুন।">
+<link rel="canonical" href="https://bdchakrirpathshala.com/category.html">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a href="#main" class="skip-link">মূল কনটেন্টে যান</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo"><span class="logo-seal">BD</span>BD চাকরির পাঠশালা</a>
+    <button class="nav-toggle" id="navToggle" aria-label="মেনু খুলুন">☰</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="recent.html">সাম্প্রতিক প্রশ্ন</a>
+      <a href="questions.html">প্রশ্ন ও উত্তর</a>
+      <a href="category.html">বিষয়ভিত্তিক প্রশ্ন</a>
+      <a href="model-test.html">মডেল টেস্ট</a>
+      <a href="news.html">চাকরির খবর</a>
+      <a href="category.html?cat=সাধারণ%20জ্ঞান">গুরুত্বপূর্ণ সাধারণ জ্ঞান</a>
+      <a href="category.html?cat=বাংলা">বাংলা</a>
+      <a href="category.html?cat=English">English</a>
+      <a href="category.html?cat=গণিত">গণিত</a>
+      <a href="category.html?cat=বাংলাদেশ%20বিষয়াবলি">বাংলাদেশ বিষয়াবলি</a>
+      <a href="category.html?cat=আন্তর্জাতিক%20বিষয়াবলি">আন্তর্জাতিক বিষয়াবলি</a>
+      <a href="category.html?cat=বিজ্ঞান,ICT">বিজ্ঞান ও ICT</a>
+      <a href="about.html">আমাদের সম্পর্কে</a>
+      <a href="contact.html">যোগাযোগ</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle">🌙 ডার্ক মোড</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero">
+    <h1 id="catTitle">বিষয়ভিত্তিক প্রশ্ন</h1>
+    <p id="catSubtitle">যে বিষয়ে প্রস্তুতি নিতে চান তা বেছে নিন</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div id="chipRow" class="chip-row" style="margin-bottom:26px;"></div>
+      <p id="resultCount" class="muted" style="margin-bottom:16px;"></p>
+      <div id="catGrid" class="q-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><h4>BD চাকরির পাঠশালা</h4><p style="color:#B9B396;font-size:.88rem;">বাংলাদেশের চাকরিপ্রার্থীদের জন্য প্রশ্ন-উত্তর, মডেল টেস্ট ও প্রস্তুতির তথ্য।</p></div>
+      <div><h4>গুরুত্বপূর্ণ লিংক</h4><a href="questions.html">প্রশ্ন ও উত্তর</a><a href="model-test.html">মডেল টেস্ট</a><a href="news.html">চাকরির খবর</a></div>
+      <div><h4>বিষয়সমূহ</h4><a href="category.html?cat=বাংলা">বাংলা</a><a href="category.html?cat=English">English</a><a href="category.html?cat=গণিত">গণিত</a></div>
+      <div><h4>ওয়েবসাইট</h4><a href="about.html">আমাদের সম্পর্কে</a><a href="contact.html">যোগাযোগ</a></div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> BD চাকরির পাঠশালা। সর্বস্বত্ব সংরক্ষিত।</div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  function renderCategoryPage() {
+    const params = new URLSearchParams(window.location.search);
+    const catParam = params.get('cat'); // একাধিক ক্যাটাগরি কমা দিয়ে দেওয়া থাকতে পারে, যেমন "বিজ্ঞান,ICT"
+    const activeCats = catParam ? catParam.split(',') : [];
+
+    // চিপ (ক্যাটাগরি বাটন) দেখানো
+    const allChip = `<a class="chip ${activeCats.length === 0 ? 'active' : ''}" href="category.html">সব বিষয়</a>`;
+    const otherChips = CATEGORY_LIST.map(c => {
+      const isActive = activeCats.includes(c);
+      return `<a class="chip ${isActive ? 'active' : ''}" href="category.html?cat=${encodeURIComponent(c)}">${c}</a>`;
+    }).join('');
+    document.getElementById('chipRow').innerHTML = allChip + otherChips;
+
+    // প্রশ্ন ফিল্টার করা
+    let results;
+    if (activeCats.length === 0) {
+      results = questionsData;
+      document.getElementById('catTitle').textContent = 'বিষয়ভিত্তিক প্রশ্ন';
+      document.getElementById('catSubtitle').textContent = 'যে বিষয়ে প্রস্তুতি নিতে চান তা বেছে নিন';
+    } else {
+      results = questionsData.filter(q => activeCats.includes(q.category));
+      document.getElementById('catTitle').textContent = activeCats.join(' ও ');
+      document.getElementById('catSubtitle').textContent = activeCats.join(', ') + ' বিষয়ের প্রশ্নসমূহ';
+    }
+
+    document.getElementById('resultCount').textContent = `মোট ${results.length} টি প্রশ্ন`;
+    const grid = document.getElementById('catGrid');
+    grid.innerHTML = results.length
+      ? results.map(q => questionCardHTML(q)).join('')
+      : '<p class="empty-note">এই বিষয়ে এখনো প্রশ্ন যোগ করা হয়নি। শীঘ্রই যোগ করা হবে।</p>';
+  }
+
+  document.addEventListener('DOMContentLoaded', renderCategoryPage);
+</script>
+</body>
+</html>

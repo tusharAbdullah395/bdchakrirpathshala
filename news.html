@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>চাকরির খবর | BD চাকরির পাঠশালা</title>
+<meta name="description" content="সাম্প্রতিক সরকারি ও বেসরকারি চাকরির খবর ও নিয়োগ বিজ্ঞপ্তি সংক্রান্ত তথ্য।">
+<link rel="canonical" href="https://bdchakrirpathshala.com/news.html">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a href="#main" class="skip-link">মূল কনটেন্টে যান</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo"><span class="logo-seal">BD</span>BD চাকরির পাঠশালা</a>
+    <button class="nav-toggle" id="navToggle" aria-label="মেনু খুলুন">☰</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="recent.html">সাম্প্রতিক প্রশ্ন</a>
+      <a href="questions.html">প্রশ্ন ও উত্তর</a>
+      <a href="category.html">বিষয়ভিত্তিক প্রশ্ন</a>
+      <a href="model-test.html">মডেল টেস্ট</a>
+      <a href="news.html">চাকরির খবর</a>
+      <a href="category.html?cat=সাধারণ%20জ্ঞান">গুরুত্বপূর্ণ সাধারণ জ্ঞান</a>
+      <a href="category.html?cat=বাংলা">বাংলা</a>
+      <a href="category.html?cat=English">English</a>
+      <a href="category.html?cat=গণিত">গণিত</a>
+      <a href="category.html?cat=বাংলাদেশ%20বিষয়াবলি">বাংলাদেশ বিষয়াবলি</a>
+      <a href="category.html?cat=আন্তর্জাতিক%20বিষয়াবলি">আন্তর্জাতিক বিষয়াবলি</a>
+      <a href="category.html?cat=বিজ্ঞান,ICT">বিজ্ঞান ও ICT</a>
+      <a href="about.html">আমাদের সম্পর্কে</a>
+      <a href="contact.html">যোগাযোগ</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle">🌙 ডার্ক মোড</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero">
+    <h1>চাকরির খবর</h1>
+    <p>নমুনা/ডেমো চাকরির খবর — বাস্তব বিজ্ঞপ্তির জন্য সংশ্লিষ্ট প্রতিষ্ঠানের ওয়েবসাইট দেখুন</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div id="newsList"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><h4>BD চাকরির পাঠশালা</h4><p style="color:#B9B396;font-size:.88rem;">বাংলাদেশের চাকরিপ্রার্থীদের জন্য প্রশ্ন-উত্তর, মডেল টেস্ট ও প্রস্তুতির তথ্য।</p></div>
+      <div><h4>গুরুত্বপূর্ণ লিংক</h4><a href="questions.html">প্রশ্ন ও উত্তর</a><a href="model-test.html">মডেল টেস্ট</a><a href="news.html">চাকরির খবর</a></div>
+      <div><h4>বিষয়সমূহ</h4><a href="category.html?cat=বাংলা">বাংলা</a><a href="category.html?cat=English">English</a><a href="category.html?cat=গণিত">গণিত</a></div>
+      <div><h4>ওয়েবসাইট</h4><a href="about.html">আমাদের সম্পর্কে</a><a href="contact.html">যোগাযোগ</a></div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> BD চাকরির পাঠশালা। সর্বস্বত্ব সংরক্ষিত।</div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('newsList').innerHTML = newsData.map(n => `
+      <div class="list-card">
+        <h3>${escapeHTML(n.title)}</h3>
+        <div class="meta">${formatDate(n.date)}</div>
+        <p>${escapeHTML(n.summary)}</p>
+      </div>
+    `).join('');
+  });
+</script>
+</body>
+</html>
